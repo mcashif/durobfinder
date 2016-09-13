@@ -19,7 +19,7 @@ class SnippetSerializer(serializers.Serializer):
         Update and return an existing `Snippet` instance, given the validated data.
         """
         instance.title = validated_data.get('title', instance.title)
-        lattitude = validated_data.get('lattitude', instance.lattitude)
-        longitude = validated_data.get('longitude', instance.longitude)
+        instance.lattitude = validated_data.get('lattitude', instance.lattitude)
+        instance.longitude = validated_data.get('longitude', instance.longitude)
         instance.save()
         return instance

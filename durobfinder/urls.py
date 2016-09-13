@@ -17,6 +17,8 @@ from django.conf.urls import include,url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from drvfinder import views
+from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
@@ -41,5 +43,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^snippets/$', views.snippet_list),
     url(r'^snippets/(?P<pk>[0-9]+)/$', views.snippet_detail),
+    url(r'^$', views.index),
+    url(r'^json/', views.getjson),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

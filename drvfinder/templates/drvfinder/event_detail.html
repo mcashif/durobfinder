@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/fonts/font-awesome.css' %}" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/bootstrap-select.min.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/owl.carousel.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/style.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/user.style.css' %}" type="text/css">
+
+    <title>Event Locator | DETAIL</title>
+
+</head>
+
+<style>
+
+pre {
+  text-align: left;
+  white-space: pre-line;
+}
+
+</style>
+
+<body onunload="" class="page-subpage page-item-detail navigation-off-canvas" id="page-top">
+
+<!-- Outer Wrapper-->
+<div id="outer-wrapper">
+    <!-- Inner Wrapper -->
+    <div id="inner-wrapper">
+        <!-- Navigation-->
+        <div class="header">
+            <div class="wrapper">
+                <div class="brand">
+                    <a href="#"><img src="/static/assets/img/logoXX.jpeg" alt="logo"></a>
+                </div>
+                <nav class="navigation-items">
+                    <div class="wrapper">
+                        <ul class="main-navigation navigation-top-header"></ul>
+                        <ul class="user-area">
+                            <li><a href="/index">Home</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- end Navigation-->
+        <!-- Page Canvas-->
+        <div id="page-canvas">
+            <!--Off Canvas Navigation-->
+            <!--end Off Canvas Navigation-->
+            <!--Page Content-->
+            <div id="page-content">
+                <div id="map-detail"></div>
+                <section class="container">
+                    <div class="row">
+                        <!--Item Detail Content-->
+                        <div class="col-md-9">
+                            <section class="block" id="main-content">
+                                <header class="page-title">
+                                    <div class="title">
+                                        <h1>{{ event.event_name }}</h1>
+                                        <figure>{{ event.event_promoter }}</figure>
+                                        <div class="image"><img src="{{ promotor.promoter_logo.url }}" alt=""></div>
+
+                                    </div>
+                                </header>
+                                <div class="row">
+                                    <!--Detail Sidebar-->
+                                    <aside class="col-md-4 col-sm-4" id="detail-sidebar">
+                                        <!--Contact-->
+                                        <section>
+                                            <header><h3>Contact</h3></header>
+                                            <address>
+                                                <div><b>Address:</b>{{ event.address }}</div>
+                                                <div><b>City:</b>{{ event.city }}</div>
+                                                <div><b>State:</b>{{ event.state }}</div>
+                                                <div><b>Zip:</b>{{ event.zip_code }}</div>
+                                            </address>
+                                        </section>
+                                        <!--end Contact-->
+                                        <!--Rating-->
+                                        <section>
+                                            <header><h3>Pricing</h3></header>
+                                            <address>
+                                                <div><b>Cost:</b>${{ event.cost }}</div>
+                                                <div><b>Pre Date:</b>{{ event.predate }}</div>
+                                                <div><b>Late Cost:</b>${{ event.cost_late }}</div>
+                                                <div><b>Cutt Date:</b>{{ event.cutoff_date }}</div>
+                                            </address>
+                                        </section>
+                                        <!--end Rating-->
+                                    </aside>
+                                    <!--end Detail Sidebar-->
+                                    <!--Content-->
+                                    <div class="col-md-8 col-sm-8">
+                                        <section>
+                                            <!-- /.item-gallery -->
+                                            <article class="block">
+                                                <header><h2>Description</h2></header>
+                                                 <pre>
+                                                  {{ event.event_description }}
+                                                </pre>
+                                            </article>
+
+                                            <!-- /.block -->
+                                            <article class="block">
+                                                <header><h2>Rules & Brackets</h2></header>
+                                                <ul class="bullets">
+
+                                                    <li><b>Rule:</b> {{ event.rule }}</li>
+                                                    <li><b>Bracket:</b> {{ event.bracket }}</li>
+                                                    {% if event.kids_special_format  %}
+                                                    <li><b>Kids Special Rule:</b> {{ event.kids_special_rules }}</li>
+                                                    <li><b>Kids Special Format:</b>{{ event.kids_special_formats }}</li>
+                                                    {% endif %}
+
+                                                </ul>
+                                            </article>
+                                            <!-- /.block -->
+                                            <!-- /.block -->
+                                            <article class="block">
+                                                <header><h2>Features</h2></header>
+                                                <ul class="bullets">
+
+                                                  {% if event.gi  %}
+                                                    <li>Gi</li>
+                                                  {% endif %}
+
+                                                  {% if event.nogi  %}
+                                                    <li>Nogi</li>
+                                                  {% endif %}
+
+                                                  {% if event.kids  %}
+                                                    <li>Kids</li>
+                                                  {% endif %}
+
+                                                  {% if event.pro  %}
+                                                    <li>Pro</li>
+                                                  {% endif %}
+
+                                                  {% if event.purse  %}
+                                                    <li>Purse</li>
+                                                  {% endif %}
+
+                                                  {% if event.absolute  %}
+                                                    <li>Absolute</li>
+                                                  {% endif %}
+
+                                                  {% if event.adults  %}
+                                                    <li>Adults</li>
+                                                  {% endif %}
+
+                                                  {% if event.kids_special_format  %}
+                                                    <li>Kids Special Format</li>
+                                                  {% endif %}
+
+                                                  {% if event.event_tentitive  %}
+                                                    <li>Event Tentitive</li>
+                                                  {% endif %}
+                                                </ul>
+                                            </article>
+                                            <!-- /.block -->
+
+                                            <!-- /.block -->
+                                        </section>
+
+                                        <figure>
+                                            <div class="info">
+                                                <i class="fa fa-globe"></i>
+                                                <a href={{ event.event_web }}>{{ event.event_web }}</a>
+                                            </div>
+                                        </figure>
+
+
+                                        <article class="block">
+                                            <header><h2>Driving Directions</h2></header>
+                                            <div id="infox"></div>
+                                        </article>
+
+                                    </div>
+                                    <!-- /.col-md-8-->
+
+                                </div>
+                                <!-- /.row -->
+                            </section>
+                            <!-- /#main-content-->
+                        </div>
+                        <!--Sidebar-->
+                        <div class="col-md-3">
+                            <aside id="sidebar">
+                                <section>
+                                    <header><h2>{{ event.event_date }}</h2></header>
+                                    <div class="wrapper">
+                                        <div class="image"><img src="{{ event.small_image.url }}" alt=""></div>
+                                    </div>
+                                    <br><br><br>
+                                        <div class="wrapper">
+                                            <div class="image"><img src="{{ event.large_image.url }}" alt=""></div>
+                                        </div>
+
+                                </section>
+
+
+                            </aside>
+                            <!-- /#sidebar-->
+                        </div>
+                        <!-- /.col-md-3-->
+                        <!--end Sidebar-->
+                        <!-- /.col-md-8-->
+                        <!-- /.col-md-3-->
+                        <!--end Sidebar-->
+                    </div><!-- /.row-->
+
+                </section>
+                <!-- /.container-->
+            </div>
+            <!-- end Page Content-->
+        </div>
+        <!-- end Page Canvas-->
+    </div>
+    <!-- end Inner Wrapper -->
+</div>
+<!-- end Outer Wrapper-->
+
+
+<script type="text/javascript" src="{% static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/before.load.js' %}"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCqIOMD67OFxE2FNLo7TcPfTQDPhvnZ2l8&sensor=false&amp;libraries=places"></script>
+<script type="text/javascript" src="{% static 'assets/js/infobox.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/richmarker-compiled.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/smoothscroll.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.hotkeys.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/maps.js' %}"></script>
+
+
+<script>
+
+
+$("img").each(function() {
+
+          var srcImg = $(this).attr("src");
+          var src="/static/assets/img/blank.png";
+
+          if (srcImg.indexOf('no-img.jpeg')!=-1) {
+              $(this).attr("src", src);
+            }
+
+   });
+
+
+$(function() {
+      var strX="{{ event.event_geocode }}";
+      var array = strX.split(',');
+      var _latitude=array[0];
+      var _longitude=array[1];
+      itemDetailMap(_latitude,_longitude,"{{ promotor.promoter_logo.url }}");
+})
+
+    $(window).load(function(){
+        var rtl = false; // Use RTL
+        initializeOwl(rtl);
+    });
+
+
+</script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="assets/js/ie-scripts.js"></script>
+<![endif]-->
+</body>
+</html>

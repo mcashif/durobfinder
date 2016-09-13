@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+
+<html lang="en-US">
+<head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/fonts/font-awesome.css' %}" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{%  static 'assets/bootstrap/css/bootstrap.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/bootstrap-select.min.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/owl.carousel.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/style.css' %}" type="text/css">
+    <link rel="stylesheet"  href="{% static 'assets/css/user.style.css' %}" type="text/css">
+    <title>Durob Locator | MAP</title>
+
+</head>
+
+<body onunload="" class="map-fullscreen page-homepage navigation-off-canvas" id="page-top">
+
+<!-- Outer Wrapper-->
+<div id="outer-wrapper">
+    <!-- Inner Wrapper -->
+    <div id="inner-wrapper">
+
+        <!-- Navigation-->
+        <div class="header">
+            <div class="wrapper">
+                <div class="brand">
+                    <a href="#"><img src="/static/assets/img/logopsd.png" alt="logo"></a>
+                </div>
+                <nav class="navigation-items">
+                    <div class="wrapper">
+                        <ul class="main-navigation navigation-top-header"></ul>
+                        <ul class="user-area">
+                            <li><a href="#">Reload</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- end Navigation-->
+
+
+        <!-- Page Canvas-->
+        <div id="page-canvas">
+
+            <!--Page Content-->
+            <div id="page-content">
+            <!-- Map Canvas-->
+            <div class="map-canvas list-width-10">
+                <!-- Map -->
+                <div class="map">
+                    <!--/.toggle-navigation-->
+                    <div id="map" class="has-parallax"></div>
+                    <!--/#map-->
+                    <div class="search-bar horizontal">
+                        <form class="main-search border-less-inputs" id="searchForm">
+                            <div class="input-row">
+
+                              <div class="form-group">
+                                  <select name="distance" id="distance">
+                                      <option value="0">All</option>
+                                      {% for drv in objDriver %}
+                                            <option value="{{ forloop.counter }}">{{drv.driver_name}}</option>
+                                      {% endfor %}
+
+                                  </select>
+                              </div><!-- /.form-group -->
+                              <div class="form-group">
+                                  <select name="time" id="daysx">
+                                      <option value="0">Now</option>
+                                      <option value="1">Today</option>
+                                      <option value="3">Last Three Days</option>
+                                      <option value="5">Last Five Days</option>
+                                      <option value="6">Last Six Days</option>
+                                  </select>
+                              </div><!-- /.form-group -->
+                                <div class="form-group">
+
+                                </div>
+                                <!-- /.form-group -->
+                            </div>
+                            <!-- /.input-row -->
+                        </form>
+                        <!-- /.main-search -->
+                    </div>
+                    <!-- /.search-bar -->
+                </div>
+                <!-- end Map -->
+
+
+            </div>
+            <!-- end Page Content-->
+        </div>
+        <!-- end Page Canvas-->
+
+    </div>
+    <!-- end Inner Wrapper -->
+</div>
+<!-- end Outer Wrapper-->
+
+<script type="text/javascript" src="{% static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/before.load.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/smoothscroll.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.hotkeys.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/icheck.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.nouislider.all.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCqIOMD67OFxE2FNLo7TcPfTQDPhvnZ2l8&sensor=false&amp;libraries=places"></script>
+<script type="text/javascript" src="{% static 'assets/js/infobox.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/richmarker-compiled.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/maps.js' %}"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="assets/js/ie-scripts.js"></script>
+<![endif]-->
+
+<script>
+
+  function loadMap(){
+
+      $.get( "/json", function( data1 ) {
+          createHomepageGoogleMap(data1);
+      });
+
+    }
+
+    loadMap();
+
+</script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="assets/js/ie-scripts.js"></script>
+<![endif]-->
+</body>
+</html>
