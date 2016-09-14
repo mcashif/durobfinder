@@ -235,7 +235,7 @@ function checkDays(now, delta){
 
   var text=$("#days :selected").text();
 
-  if(text=="Now" && now)
+  if(text=="Now" && now==1)
       return true;
 
   if(text=="Today" && delta==0)
@@ -275,7 +275,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( checkName(json.data[i].title) && checkDays(json.data[i].now,json.data[i].delta) && checkTime(json.data[i].hrs) )
+                  if ( checkName(json.data[i].title) && checkDays(json.data[i].now,json.data[i].delta))
                   {
                       category = json.data[i].category;
                       visibleArray.push(loadedMarkers[i]);
