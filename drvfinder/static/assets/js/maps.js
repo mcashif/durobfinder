@@ -275,7 +275,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( checkName(json.data[i].title) && checkDays(json.data[i].now,json.data[i].delta))
+                  if ( checkName(json.data[i].title) )
                   {
                       category = json.data[i].category;
                       visibleArray.push(loadedMarkers[i]);
