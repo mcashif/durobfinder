@@ -9,6 +9,12 @@ class DriverAdmin(admin.ModelAdmin):
         list_filter = ('driver_name', 'driver_phone')
         pass
 
+class SnippetAdmin(admin.ModelAdmin):
+
+        list_display = ('created','title', 'lattitude', 'longitude')
+        list_filter = ('created', 'title')
+        pass
+
 
 admin.site.register(Driver,DriverAdmin)
 admin.site.register(Snippet)

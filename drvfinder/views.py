@@ -20,25 +20,60 @@ def index(request):
     objDriver=Driver.objects.all
     return render(request, 'drvfinder/index.html', {'objDriver': objDriver})
 
+def getDelta(created):
+    today = datetime.datetime.today()
+    todayStr = today.strftime('%Y-%m-%d')
+    creataedDateStr=created.strftime('%Y-%m-%d')
+
+    delta1=today-datetime.timedelta(days=2)
+    delta2=today-datetime.timedelta(days=2)
+    delta3=today-datetime.timedelta(days=2)
+
+    if(todayStr==creataedDateStr):
+        return 0
+
+    if(delta1.strftime('%Y-%m-%d')==creataedDateStr):
+        return 1
+
+    if(delta2.strftime('%Y-%m-%d')==creataedDateStr):
+        return 2
+
+    if(delta3.strftime('%Y-%m-%d')==creataedDateStr):
+        return 3
+
+    return -1
+
 def getjson(request):
 
     dataX={}
     DataM = []
     driver=Driver.objects.all()
+
     count=1
     for drv in driver:
-        obj=Snippet.objects.filter(title=str(drv.id))
-        data={}
-        data['id'] = count
-        count+=1
-        data['title'] = drv.driver_name
-        data['category'] = "real_estate"
-        data['date'] = obj[0].created.strftime('%Y-%m-%d')
-        data['time'] = obj[0].created.strftime('%H:%M:%S')
-        data['latitude'] = float(obj[0].lattitude)
-        data['longitude'] = float(obj[0].longitude)
-        data['picture'] = drv.driver_picture.url
-        DataM.append(data)
+        points=Snippet.objects.filter(title=str(drv.id))
+        countObj=len(points)
+        countX=0
+        for obj in points:
+            data={}
+            data['id'] = count
+            count+=1
+            countX+=1
+            data['title'] = drv.driver_name
+            data['category'] = "real_estate"
+            data['date'] = obj.created.strftime('%Y-%m-%d')
+            data['delta'] = getDelta(obj.created)
+            data['time'] = obj.created.strftime('%H:%M:%S')
+            data['hrs'] = obj.created.strftime('%H')
+            data['longitude'] = float(obj.longitude)
+            data['latitude'] = float(obj.longitude)
+            data['picture'] = drv.driver_picture.url
+            if(countX==countObj):
+                data['now'] = 1
+            else:
+                data['now'] = 0
+
+            DataM.append(data)
 
     dataX['data']=DataM
     json_data = json.dumps(dataX)
@@ -67,7 +102,7 @@ def snippet_list(request):
 
     elif request.method == 'POST':
         today = datetime.datetime.today()
-        Snippet.objects.filter(created__lte=today-datetime.timedelta(days=5)).delete()
+        Snippet.objects.filter(created__lte=today-datetime.timedelta(days=3)).delete()
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():

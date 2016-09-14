@@ -56,30 +56,62 @@
                     <!--/.toggle-navigation-->
                     <div id="map" class="has-parallax"></div>
                     <!--/#map-->
-                    <div class="search-bar horizontal">
-                        <form class="main-search border-less-inputs" id="searchForm">
-                            <div class="input-row">
 
-                              <div class="form-group">
-                                  <select name="distance" id="distance">
+                    <div class="search-bar horizontal">
+                          <form class="main-search border-less-inputs" id="searchForm">
+                            <div class="input-row">
+                                <div class="form-group">
+                                  <select name="distance" id="distance" width="100">
                                       <option value="0">All</option>
                                       {% for drv in objDriver %}
                                             <option value="{{ forloop.counter }}">{{drv.driver_name}}</option>
                                       {% endfor %}
 
                                   </select>
-                              </div><!-- /.form-group -->
-                              <div class="form-group">
-                                  <select name="time" id="daysx">
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                  <select name="days" id="days">
                                       <option value="0">Now</option>
                                       <option value="1">Today</option>
-                                      <option value="3">Last Three Days</option>
-                                      <option value="5">Last Five Days</option>
-                                      <option value="6">Last Six Days</option>
+                                      <option value="3">1 Day Back</option>
+                                      <option value="5">2 Days Back</option>
+                                      <option value="6">3 Days Back</option>
                                   </select>
-                              </div><!-- /.form-group -->
+                                </div>
+                                <!-- /.form-group -->
                                 <div class="form-group">
-
+                                  <select name="time" id="time">
+                                      <option value="0">All</option>
+                                      <option value="1">0</option>
+                                      <option value="2">1</option>
+                                      <option value="3">2</option>
+                                      <option value="4">3</option>
+                                      <option value="5">4</option>
+                                      <option value="6">5</option>
+                                      <option value="7">6</option>
+                                      <option value="8">7</option>
+                                      <option value="9">8</option>
+                                      <option value="10">9</option>
+                                      <option value="11">10</option>
+                                      <option value="12">11</option>
+                                      <option value="13">12</option>
+                                      <option value="14">13</option>
+                                      <option value="15">14</option>
+                                      <option value="16">15</option>
+                                      <option value="17">16</option>
+                                      <option value="18">17</option>
+                                      <option value="19">18</option>
+                                      <option value="20">19</option>
+                                      <option value="21">20</option>
+                                      <option value="22">21</option>
+                                      <option value="23">22</option>
+                                      <option value="24">23</option>
+                                  </select>
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-refresh"></i></button>
                                 </div>
                                 <!-- /.form-group -->
                             </div>

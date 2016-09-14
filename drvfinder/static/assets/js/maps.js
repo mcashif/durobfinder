@@ -189,7 +189,11 @@ function addEvents(newMarkers, json){
                     dynamicLoadMarkers(map, newMarkers, json);
               });
 
-              $('#daysx').on('change', function () {
+              $('#days').on('change', function () {
+                  dynamicLoadMarkers(map, newMarkers, json);
+              });
+
+              $('#time').on('change', function () {
                   dynamicLoadMarkers(map, newMarkers, json);
               });
 
@@ -227,6 +231,41 @@ function checkName(name){
   return false;
 }
 
+function checkDays(now, delta){
+
+  var text=$("#days :selected").text();
+
+  if(text=="Now" && now)
+      return true;
+
+  if(text=="Today" && delta==0)
+     return true;
+
+  if(text=="1 Day Back" && delta==1)
+        return true;
+
+  if(text=="2 Days Back" && delta==2)
+        return true;
+
+  if(text=="3 Days Back" && delta==3)
+        return true;
+
+  return false;
+}
+
+function checkTime(time){
+
+  var text=$("#time :selected").text();
+
+  if(text=="All")
+      return true;
+
+  if(time==text)
+      return true;
+
+  return false;
+}
+
 function dynamicLoadMarkers(map, loadedMarkers, json){
 
               var visibleArray = [];
@@ -236,7 +275,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( checkName(json.data[i].title) )
+                  if ( checkName(json.data[i].title) && checkDays(json.data[i].now,json.data[i].delta) && checkTime(json.data[i].hrs) )
                   {
                       category = json.data[i].category;
                       visibleArray.push(loadedMarkers[i]);
