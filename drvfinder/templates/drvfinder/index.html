@@ -71,7 +71,7 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                  <select name="days" id="days">
+                                  <select name="days" id="daysx">
                                       <option value="0">Now</option>
                                       <option value="1">1 Day Back</option>
                                       <option value="2">2 Days Back</option>
@@ -80,7 +80,7 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                  <select name="time" id="time">
+                                  <select name="time" id="timex">
                                       <option value="0">Now</option>
                                       <option value="1">00</option>
                                       <option value="2">01</option>
@@ -155,42 +155,10 @@
 
 <script>
 
-  function loadMap(){
-
-      $.get( "/json", function( data1 ) {
-          createHomepageGoogleMap(data1);
-      });
-
-    }
 
     function myFunction(){
         event.preventDefault();
-
-        var val="0";
-        var val2="0"
-        var text=$("#time :selected").text();
-        var text2=$("#days :selected").text();
-
-
-        if(text=="Now")
-             val="0";
-             else {
-               val=text;
-             }
-
-        if(text2=="1 Day Back")
-              val2="1";
-
-        if(text2=="2 Days Back")
-              val2="2";
-
-        if(text2=="3 Days Back")
-              val2="3";
-
-        $.get( "/jsondayhour/"+val2+"/"+val, function( data1 ) {
-            createHomepageGoogleMap(data1);
-        });
-
+        getDifferentData();
       }
 
     $(window).load(function(){

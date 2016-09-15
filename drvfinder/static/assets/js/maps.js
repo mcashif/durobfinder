@@ -20,6 +20,8 @@ var _longitude = 55.277397;
 var _firstTimeLoaded=true;
 var _zoom = 10;
 var map;
+var json;
+var newMarkers = [];
 
 
 function setMap(){
@@ -51,12 +53,10 @@ function setMap(){
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function createHomepageGoogleMap(json){
+function createHomepageGoogleMap(){
 
 
      map=setMap();
-
-     var newMarkers = [];
      var markerClicked = 0;
      var activeMarker = false;
      var lastClicked = false;
@@ -164,40 +164,75 @@ function createHomepageGoogleMap(json){
         });
 
 
-        addEvents(newMarkers, json);
+        addEvents();
 
         redrawMap('google', map);
 
 }
 
 
-function addEvents(newMarkers, json){
+function addEvents(){
 
               $('#msearch').keyup(function() {
                 delay(function(){
-                  dynamicLoadMarkers(map, newMarkers, json);
+                  dynamicLoadMarkers();
                 }, 1000 );
               });
 
               google.maps.event.addListener(map, 'idle', function() {
-                dynamicLoadMarkers(map, newMarkers, json);
+                dynamicLoadMarkers();
               });
 
 
               $('#distance').on('change', function () {
                     _firstTimeLoaded=true;
-                    dynamicLoadMarkers(map, newMarkers, json);
+                    dynamicLoadMarkers();
               });
+}
 
-              $('#days').on('change', function () {
-                  dynamicLoadMarkers(map, newMarkers, json);
-              });
+function getDifferentData(){
 
-              $('#time').on('change', function () {
-                  dynamicLoadMarkers(map, newMarkers, json);
-              });
+  var val="0";
+  var val2="0"
+  var text=$("#timex :selected").text();
+  var text2=$("#daysx :selected").text();
+
+
+  if(text=="Now")
+       val="0";
+       else {
+         val=text;
+       }
+
+  if(text2=="1 Day Back")
+        val2="1";
+
+  if(text2=="2 Days Back")
+        val2="2";
+
+  if(text2=="3 Days Back")
+        val2="3";
+
+  if(val=="0" && val2=="0"){
+        loadMap();
+  }else{
+    $.get( "/jsondayhour/"+val2+"/"+val, function( data1 ) {
+        json=data1;
+        createHomepageGoogleMap();
+        dynamicLoadMarkers();
+    });
+  }
 
 }
+
+function loadMap(){
+
+    $.get( "/json", function( data1 ) {
+        json=data1;
+        createHomepageGoogleMap();
+    });
+
+  }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,7 +301,7 @@ function checkTime(time){
   return false;
 }
 
-function dynamicLoadMarkers(map, loadedMarkers, json){
+function dynamicLoadMarkers(){
 
               var visibleArray = [];
               var visibleItemsArray = [];
@@ -278,7 +313,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
                   if ( checkName(json.data[i].title) )
                   {
                       category = json.data[i].category;
-                      visibleArray.push(loadedMarkers[i]);
+                      visibleArray.push(newMarkers[i]);
                       $.each( visibleArray, function (i) {
                           setTimeout(function(){
                               if ( map.getBounds().contains(visibleArray[i].getPosition()) ){
@@ -290,8 +325,8 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
                           }, i * 50);
                       });
                   } else {
-                      loadedMarkers[i].content.className = '';
-                      loadedMarkers[i].setMap(null);
+                      newMarkers[i].content.className = '';
+                      newMarkers[i].setMap(null);
                   }
               }
 
