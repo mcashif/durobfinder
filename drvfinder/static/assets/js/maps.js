@@ -369,8 +369,8 @@ function drawItemSpecific(category, json, i){
 
    add=GetAddress(json.data[i].latitude,json.data[i].longitude)
 
-    var itemSpecific = '';
-            return itemSpecific;
+    var itemSpecific = json.data[i].time;
+    return itemSpecific;
 
 }
 

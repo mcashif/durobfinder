@@ -108,9 +108,9 @@
                                       <option value="24">23</option>
                                   </select>
                                 </div>
-                                <!-- /.form-group -->
+                                <!-- /.form-group onclick="myFunction() -->
                                 <div class="form-group">
-                                    <button onclick="myFunction()" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-default"><i class="fa fa-refresh"></i></button>
                                 </div>
                                 <!-- /.form-group -->
                             </div>
@@ -156,6 +156,7 @@
 <script>
 
   function loadMap(){
+
       $.get( "/json", function( data1 ) {
           createHomepageGoogleMap(data1);
       });
