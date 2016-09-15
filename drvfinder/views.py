@@ -162,7 +162,7 @@ def snippet_list(request):
 
     elif request.method == 'POST':
         today = datetime.datetime.today()
-        Snippet.objects.filter(created__lte=today-datetime.timedelta(days=3)).delete()
+        Snippet.objects.filter(created__lte=today-datetime.timedelta(days=2)).delete()
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():

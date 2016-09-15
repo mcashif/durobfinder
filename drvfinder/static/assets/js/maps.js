@@ -311,7 +311,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
 function redrawMap(mapProvider, map){
 
-        $('.map-canvas').toggleClass('results-collapsed');
+        
 
 }
 

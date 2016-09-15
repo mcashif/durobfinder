@@ -35,7 +35,7 @@
                     <div class="wrapper">
                         <ul class="main-navigation navigation-top-header"></ul>
                         <ul class="user-area">
-                            <li><a href="#">Reload</a></li>
+                            <li><a href="http://durob.pythonanywhere.com">Reload</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -156,7 +156,7 @@
 <script>
 
   function loadMap(){
-
+      $('.map-canvas').toggleClass('results-collapsed');
       $.get( "/json", function( data1 ) {
           createHomepageGoogleMap(data1);
       });
