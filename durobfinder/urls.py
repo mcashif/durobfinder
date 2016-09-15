@@ -46,5 +46,6 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^jsondayhour/(?P<get_day>[0-9]+)/(?P<get_hour>[0-9]+)/$', views.getjsonDayHour),
     url(r'^json/', views.getjsonNow),
+    url(r'^jsonall/', views.getjsonAll),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

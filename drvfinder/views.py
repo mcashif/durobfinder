@@ -43,6 +43,36 @@ def getDelta(created):
 
     return -1
 
+def getjsonAll(request):
+
+    dataX={}
+    DataM = []
+    driver=Driver.objects.all()
+
+    count=1
+    for drv in driver:
+        points=Snippet.objects.filter(title=str(drv.id))
+        countObj=len(points)
+        countX=0
+        for obj in points:
+            count+=1
+            countX+=1
+            data={}
+            data['id'] = count
+            data['title'] = drv.driver_name
+            data['category'] = "real_estate"
+            data['date'] = obj.created.strftime('%Y-%m-%d')
+            data['delta'] = getDelta(obj.created)
+            data['time'] = obj.created.strftime('%H:%M:%S')
+            data['hrs'] = obj.created.strftime('%H')
+            data['longitude'] = float(obj.longitude)
+            data['latitude'] = float(obj.lattitude)
+            data['picture'] = drv.driver_picture.url
+            DataM.append(data)
+
+    dataX['data']=DataM
+    json_data = json.dumps(dataX)
+    return HttpResponse(json_data, content_type='json')
 def getjsonNow(request):
 
     dataX={}
