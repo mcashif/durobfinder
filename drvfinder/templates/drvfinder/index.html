@@ -50,7 +50,7 @@
             <!--Page Content-->
             <div id="page-content">
             <!-- Map Canvas-->
-            <div class="map-canvas list-width-10">
+            <div class="map-canvas results-collapsed">
                 <!-- Map -->
                 <div class="map">
                     <!--/.toggle-navigation-->
@@ -110,7 +110,7 @@
                                 </div>
                                 <!-- /.form-group onclick="myFunction() -->
                                 <div class="form-group">
-                                    <button class="btn btn-default"><i class="fa fa-refresh"></i></button>
+                                    <button onclick="myFunction()" class="btn btn-default"><i class="fa fa-refresh"></i></button>
                                 </div>
                                 <!-- /.form-group -->
                             </div>
@@ -197,6 +197,8 @@
         var rtl = false; // Use RTL
         initializeOwl(rtl);
     });
+
+     loadMap();
 
 </script>
 
