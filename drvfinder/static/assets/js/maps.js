@@ -55,11 +55,13 @@ function setMap(){
 
 function createHomepageGoogleMap(){
 
-
      map=setMap();
+
+     newMarkers = [];
      var markerClicked = 0;
      var activeMarker = false;
      var lastClicked = false;
+
 
      for (var i = 0; i < json.data.length; i++) {
 
@@ -214,12 +216,13 @@ function getDifferentData(){
         val2="3";
 
   if(val=="0" && val2=="0"){
+       _firstTimeLoaded=true;
         loadMap();
   }else{
     $.get( "/jsondayhour/"+val2+"/"+val, function( data1 ) {
         json=data1;
+        _firstTimeLoaded=true;
         createHomepageGoogleMap();
-        dynamicLoadMarkers();
     });
   }
 
@@ -262,41 +265,6 @@ function checkName(name){
 
   if(name==text)
      return true;
-
-  return false;
-}
-
-function checkDays(now, delta){
-
-  var text=$("#days :selected").text();
-
-  if(text=="Now" && now==1)
-      return true;
-
-  if(text=="Today" && delta==0)
-     return true;
-
-  if(text=="1 Day Back" && delta==1)
-        return true;
-
-  if(text=="2 Days Back" && delta==2)
-        return true;
-
-  if(text=="3 Days Back" && delta==3)
-        return true;
-
-  return false;
-}
-
-function checkTime(time){
-
-  var text=$("#time :selected").text();
-
-  if(text=="All")
-      return true;
-
-  if(time==text)
-      return true;
 
   return false;
 }
