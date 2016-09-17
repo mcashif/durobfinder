@@ -60,6 +60,7 @@ def getjsonAll(request):
             data={}
             data['id'] = count
             data['title'] = drv.driver_name
+            data['phone'] = drv.driver_phone
             data['category'] = "real_estate"
             data['date'] = obj.created.strftime('%Y-%m-%d')
             data['delta'] = getDelta(obj.created)
@@ -91,6 +92,7 @@ def getjsonNow(request):
                 data={}
                 data['id'] = count
                 data['title'] = drv.driver_name
+                data['phone'] = drv.driver_phone
                 data['category'] = "real_estate"
                 data['date'] = obj.created.strftime('%Y-%m-%d')
                 data['delta'] = getDelta(obj.created)
@@ -124,6 +126,7 @@ def getjsonDayHour(request,get_day,get_hour):
                     data={}
                     data['id'] = count
                     data['title'] = drv.driver_name
+                    data['phone'] = drv.driver_phone
                     data['category'] = "real_estate"
                     data['date'] = obj.created.strftime('%Y-%m-%d')
                     data['delta'] = getDelta(obj.created)
@@ -161,9 +164,11 @@ def snippet_list(request):
         return JSONResponse(serializer.data)
 
     elif request.method == 'POST':
-        today = datetime.datetime.today()
-        Snippet.objects.filter(created__lte=today-datetime.timedelta(days=2)).delete()
+        #today = datetime.datetime.today()
+        #Snippet.objects.filter(created__lte=today-datetime.timedelta(days=2)).delete()
         data = JSONParser().parse(request)
+        driver_id=data['user_name']
+        Snippet.objects.filter(title=driver_id).delete()
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

@@ -329,7 +329,7 @@ function drawInfobox(category, infoboxContent, json, i){
 
     if(json.data[i].color)          { var color = json.data[i].color }
         else                        { color = '' }
-    if( json.data[i].date )        { var price = '<div class="price">' + json.data[i].date +  '</div>' }
+    if( json.data[i].phone )        { var price = '<div class="price">' + json.data[i].phone +  '</div>' }
         else                        { price = '' }
     if(json.data[i].id)             { var id = json.data[i].id }
         else                        { id = '' }
