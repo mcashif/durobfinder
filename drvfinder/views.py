@@ -164,7 +164,7 @@ def snippet_list(request):
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         driver_id=data['title']
-        if(Driver.objects.filter(pk=int(driver_id)))
+        if(Driver.objects.filter(pk=int(driver_id))):
             Snippet.objects.filter(title=driver_id).delete()
             serializer = SnippetSerializer(data=data)
             if serializer.is_valid():
