@@ -167,7 +167,8 @@ def snippet_list(request):
         #today = datetime.datetime.today()
         #Snippet.objects.filter(created__lte=today-datetime.timedelta(days=2)).delete()
         data = JSONParser().parse(request)
-        driver_id=data['user_name']
+        driver_id=data['title']
+        #print(data)
         Snippet.objects.filter(title=driver_id).delete()
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
