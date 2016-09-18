@@ -79,7 +79,6 @@ def getjsonNow(request):
     dataX={}
     DataM = []
     driver=Driver.objects.all()
-
     count=1
     for drv in driver:
         points=Snippet.objects.filter(title=str(drv.id))
@@ -135,7 +134,6 @@ def getjsonDayHour(request,get_day,get_hour):
                     data['longitude'] = float(obj.longitude)
                     data['latitude'] = float(obj.lattitude)
                     data['picture'] = drv.driver_picture.url
-                    data['now'] = 1
                     DataM.append(data)
 
     dataX['data']=DataM
@@ -164,16 +162,14 @@ def snippet_list(request):
         return JSONResponse(serializer.data)
 
     elif request.method == 'POST':
-        #today = datetime.datetime.today()
-        #Snippet.objects.filter(created__lte=today-datetime.timedelta(days=2)).delete()
         data = JSONParser().parse(request)
         driver_id=data['title']
-        #print(data)
-        Snippet.objects.filter(title=driver_id).delete()
-        serializer = SnippetSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JSONResponse(serializer.data, status=201)
+        if(Driver.objects.filter(pk=int(driver_id)))
+            Snippet.objects.filter(title=driver_id).delete()
+            serializer = SnippetSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JSONResponse(serializer.data, status=201)
         return JSONResponse(serializer.errors, status=400)
 
 
