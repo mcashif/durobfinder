@@ -20,7 +20,7 @@ from drvfinder import views
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework import routers, serializers, viewsets
-
+admin.site.site_header = 'Durob Administration'
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
