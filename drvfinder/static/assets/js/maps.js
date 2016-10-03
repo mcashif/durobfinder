@@ -306,6 +306,8 @@ function dynamicLoadMarkers(){
                bounds.extend(visibleArray[i].getPosition());
               }
               map.fitBounds(bounds);
+              if(visibleArray.length==1)
+                 map.setZoom(10);
             }
 
     }
