@@ -307,7 +307,7 @@ function dynamicLoadMarkers(){
               }
               map.fitBounds(bounds);
               if(visibleArray.length==1)
-                 map.setZoom(14);
+                 map.setZoom(16);
             }
 
     }
