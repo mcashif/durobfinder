@@ -64,8 +64,8 @@ def getjsonAll(request):
             data['category'] = "real_estate"
             data['date'] = obj.created.strftime('%Y-%m-%d')
             data['delta'] = getDelta(obj.created)
-            data['time'] = obj.created.strftime('%H:%M:%S')
-            data['hrs'] = obj.created.strftime('%H')
+            data['time'] = (obj.created + datetime.timedelta(hours=4)).strftime('%H:%M:%S')
+            data['hrs'] = (obj.created + datetime.timedelta(hours=4)).strftime('%H')
             data['longitude'] = float(obj.longitude)
             data['latitude'] = float(obj.lattitude)
             data['picture'] = drv.driver_picture.url
@@ -95,8 +95,8 @@ def getjsonNow(request):
                 data['category'] = "real_estate"
                 data['date'] = obj.created.strftime('%Y-%m-%d')
                 data['delta'] = getDelta(obj.created)
-                data['time'] = obj.created.strftime('%H:%M:%S')
-                data['hrs'] = obj.created.strftime('%H')
+                data['time'] = (obj.created + datetime.timedelta(hours=4)).strftime('%H:%M:%S')
+                data['hrs'] = o(obj.created + datetime.timedelta(hours=4)).strftime('%H')
                 data['longitude'] = float(obj.longitude)
                 data['latitude'] = float(obj.lattitude)
                 data['picture'] = drv.driver_picture.url
